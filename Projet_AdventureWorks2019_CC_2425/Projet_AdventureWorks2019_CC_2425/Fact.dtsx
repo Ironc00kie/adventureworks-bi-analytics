@@ -1,0 +1,2777 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/13/2024 11:51:12 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-226V8CD"
+  DTS:CreatorName="DESKTOP-226V8CD\Mahdi"
+  DTS:DTSID="{0F170A23-7AD2-4036-BD95-E9990FBCAF16}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="Fact"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{B3C35EEC-5E3D-4610-87ED-ED048AB088DC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3E923DB6-6E5D-4468-8673-F2327405FD43}"
+      DTS:ObjectName="DESKTOP-226V8CD.AdventureWorks2019">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-226V8CD;Initial Catalog=AdventureWorks2019;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{3E923DB6-6E5D-4468-8673-F2327405FD43}DESKTOP-226V8CD.AdventureWorks2019;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8366CD09-DB9D-42A0-B707-8998C63226AC}"
+      DTS:ObjectName="DESKTOP-226V8CD.Projet_CC_24_25">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-226V8CD;Initial Catalog=Projet_CC_24_25;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Fact-{8366CD09-DB9D-42A0-B707-8998C63226AC}DESKTOP-226V8CD.Projet_CC_24_25;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Empty Fact"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{95f27738-28a1-4dfb-8824-dbe77a1bb0e9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Empty Fact"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8366CD09-DB9D-42A0-B707-8998C63226AC}"
+          SQLTask:SqlStatementSource="delete from Fact_Inventory&#xA;delete from Fact_Sales" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Fact_Inventory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tâche de flux de données"
+      DTS:DTSID="{21507e5e-8fd1-45f7-a77b-f453c4edee9b}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fact_Inventory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Fact_Inventory\Fact_Inventory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destination OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Destination OLE DB"
+              name="Fact_Inventory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">[dbo].[Fact_Inventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Inventory\Fact_Inventory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB]"
+                  errorOrTruncationOperation="Insérer"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrée de destination OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[ProductID]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].Columns[InventoryQty]"
+                      cachedDataType="i2"
+                      cachedName="InventoryQty"
+                      externalMetadataColumnId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[InventoryQty]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[InventoryQty]" />
+                    <inputColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].Columns[LocationID]"
+                      cachedDataType="i2"
+                      cachedName="LocationID"
+                      externalMetadataColumnId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[LocationID]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[LocationID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[InventoryQty]"
+                      dataType="i2"
+                      name="InventoryQty" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB].ExternalColumns[LocationID]"
+                      dataType="i2"
+                      name="LocationID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Inventory\Fact_Inventory.Outputs[Sortie d'erreur de destination OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de destination OLE DB"
+                  synchronousInputId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Inventory\Fact_Inventory.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\Fact_Inventory.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Inventory\Fact_Inventory.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Inventory\ProductInventory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+              description="Source OLE DB"
+              name="ProductInventory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">[Production].[ProductInventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable contenant la commande SQL à exécuter."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Mappages entre les paramètres de la commande SQL et les variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Inventory\ProductInventory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB]"
+                  name="Sortie de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[ProductID]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[LocationID]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[LocationID]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[LocationID]"
+                      name="LocationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[InventoryQty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[Quantity]"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].Columns[InventoryQty]"
+                      name="InventoryQty"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[LocationID]"
+                      dataType="i2"
+                      name="LocationID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      name="Shelf" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[Bin]"
+                      dataType="ui1"
+                      name="Bin" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[LocationID]"
+                      dataType="i2"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[LocationID]"
+                      name="LocationID" />
+                    <outputColumn
+                      refId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie d'erreur de source OLE DB].Columns[Quantity]"
+                      name="Quantity" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Fact_Inventory.Paths[Sortie de source OLE DB]"
+              endId="Package\Fact_Inventory\Fact_Inventory.Inputs[Entrée de destination OLE DB]"
+              name="Sortie de source OLE DB"
+              startId="Package\Fact_Inventory\ProductInventory.Outputs[Sortie de source OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Fact_Sales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tâche de flux de données"
+      DTS:DTSID="{39A21228-03E6-4D42-B18B-B98E396EF23F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fact_Sales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Fact_Sales\Colonne dérivée"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Colonne dérivée;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;0"
+              description="Crée de nouvelles valeurs de colonne en appliquant des expressions aux colonnes d'entrée de transformation. Créez de nouvelles colonnes ou remplacez celles qui existent déjà. Par exemple, concaténez les valeurs de la colonne 'prénom' et de la colonne 'nom' pour créer une colonne 'nom complet'."
+              name="Colonne dérivée"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée]"
+                  description="Entrée de la transformation de colonnes dérivées"
+                  name="Entrée de colonne dérivée">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPriceDiscount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie de colonne dérivée]"
+                  description="Sortie par défaut de la transformation de colonnes dérivées"
+                  exclusionGroup="1"
+                  name="Sortie de colonne dérivée"
+                  synchronousInputId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie de colonne dérivée].Columns[ExtendedAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Calcul"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie de colonne dérivée].Columns[ExtendedAmount]"
+                      name="ExtendedAmount"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expression de colonne dérivée"
+                          name="Expression">#{Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPrice]} * (1 - #{Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPriceDiscount]}) * #{Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[OrderQty]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expression claire de colonne dérivée"
+                          expressionType="Notify"
+                          name="FriendlyExpression">UnitPrice * (1 - UnitPriceDiscount) * OrderQty</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie d'erreur de colonne dérivée]"
+                  description="Sortie d'erreur de la transformation de colonnes dérivées"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de colonne dérivée"
+                  synchronousInputId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie d'erreur de colonne dérivée].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie d'erreur de colonne dérivée].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie d'erreur de colonne dérivée].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie d'erreur de colonne dérivée].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\Fact_Sales"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destination OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Destination OLE DB"
+              name="Fact_Sales"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">[dbo].[Fact_Sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Sales\Fact_Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB]"
+                  errorOrTruncationOperation="Insérer"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrée de destination OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[SalesOrderDetailID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailID"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesOrderDetailID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderDetailID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[ProductID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[OrderQty]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPriceDiscount]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[Freight]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Freight]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[SubTotal]"
+                      cachedDataType="cy"
+                      cachedName="SubTotal"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SubTotal]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SubTotal]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[TaxAmt]"
+                      cachedDataType="cy"
+                      cachedName="TaxAmt"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TaxAmt]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TaxAmt]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[TotalDue]"
+                      cachedDataType="cy"
+                      cachedName="TotalDue"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TotalDue]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TotalDue]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[Status]"
+                      cachedDataType="ui1"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[Status]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[CustomerID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[SalesPersonID]"
+                      cachedDataType="i4"
+                      cachedName="SalesPersonID"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesPersonID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesPersonID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TerritoryID]"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].Columns[ExtendedAmount]"
+                      cachedDataType="numeric"
+                      cachedName="ExtendedAmount"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[ExtendedAmount]"
+                      lineageId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie de colonne dérivée].Columns[ExtendedAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesOrderDetailID]"
+                      dataType="i4"
+                      name="SalesOrderDetailID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[OrderQty]"
+                      dataType="i2"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[UnitPriceDiscount]"
+                      dataType="cy"
+                      name="UnitPriceDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SubTotal]"
+                      dataType="cy"
+                      name="SubTotal" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TaxAmt]"
+                      dataType="cy"
+                      name="TaxAmt" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TotalDue]"
+                      dataType="cy"
+                      name="TotalDue" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[Status]"
+                      dataType="ui1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[SalesPersonID]"
+                      dataType="i4"
+                      name="SalesPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[TerritoryID]"
+                      dataType="i4"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB].ExternalColumns[ExtendedAmount]"
+                      dataType="numeric"
+                      name="ExtendedAmount"
+                      precision="26"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Fact_Sales.Outputs[Sortie d'erreur de destination OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de destination OLE DB"
+                  synchronousInputId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Fact_Sales.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\Fact_Sales.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Fact_Sales.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\Jointure de fusion"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Jointure de fusion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Combine deux flux de données triés en un seul à l'aide de la jointure FULL, LEFT ou INNER. Nous recommandons cette transformation lorsque les flux de données peuvent être triés au niveau de leurs sources."
+              name="Jointure de fusion"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le type de jointure à effectuer."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre de colonnes dans la clé de tri."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs NULL sont traitées comme valeurs égales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indique le nombre maximal de mémoires tampons demandées par entrée avant blocage."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée gauche de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[SalesOrderDetailID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailID"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderDetailID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPriceDiscount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée droite de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesOrderID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Freight]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[SubTotal]"
+                      cachedDataType="cy"
+                      cachedName="SubTotal"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SubTotal]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TaxAmt]"
+                      cachedDataType="cy"
+                      cachedName="TaxAmt"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TaxAmt]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TotalDue]"
+                      cachedDataType="cy"
+                      cachedName="TotalDue"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TotalDue]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Status]"
+                      cachedDataType="ui1"
+                      cachedName="Status"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[SalesPersonID]"
+                      cachedDataType="i4"
+                      cachedName="SalesPersonID"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesPersonID]" />
+                    <inputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TerritoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion]"
+                  isSorted="true"
+                  name="Sortie de jointure de fusion">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[SalesOrderID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[SalesOrderDetailID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ProductID]"
+                      name="ProductID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ProductID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[OrderQty]"
+                      dataType="i2"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[OrderQty]"
+                      name="OrderQty">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[OrderQty]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPrice]"
+                      name="UnitPrice">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[UnitPrice]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[UnitPriceDiscount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Freight]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Freight]"
+                      name="Freight">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Freight]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SubTotal]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SubTotal]"
+                      name="SubTotal">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[SubTotal]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TaxAmt]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TaxAmt]"
+                      name="TaxAmt">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TaxAmt]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TotalDue]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TotalDue]"
+                      name="TotalDue">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TotalDue]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Status]"
+                      dataType="ui1"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Status]"
+                      name="Status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[CustomerID]"
+                      name="CustomerID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[CustomerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesPersonID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesPersonID]"
+                      name="SalesPersonID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[SalesPersonID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TerritoryID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\Recherche"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Recherche;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;6"
+              description="Joint des colonnes supplémentaires au flux de données en recherchant des valeurs dans une table. Par exemple, joignez la colonne 'id employé' à la table des employés afin d'obtenir la 'date d'embauche' et le 'nom de l'employé'. Nous recommandons cette transformation lorsque la table de recherche peut être stockée en mémoire."
+              name="Recherche"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Spécifie l'instruction SQL qui génère la table de correspondance."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Fact_Sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie une instruction SQL qui utilise des paramètres pour générer la table de correspondance."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Fact_Sales]) [refTable]
+where [refTable].[SalesOrderID] = ? and [refTable].[SalesOrderDetailID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le type de connexion utilisé pour accéder au dataset de référence."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le type de cache de la table de correspondance."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie comment la transformation de recherche gère les lignes sans entrées correspondantes dans le jeu de données de référence."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le pourcentage du cache alloué aux lignes sans entrées correspondantes dans le dataset de référence."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indique si les métadonnées sont à référencer en format XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SalesOrderID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesOrderDetailID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OrderQty" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPriceDiscount" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Freight" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SubTotal" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TaxAmt" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TotalDue" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Status" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesPersonID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ExtendedAmount" dataType="DT_NUMERIC" length="0" precision="26" scale="4" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Spécifie la liste d'identificateurs de traçabilité se mappant aux paramètres utilisés dans la propriété SQLCommand par l'instruction SQL. Les entrées dans la liste sont séparées par des points-virgules."
+                  name="ParameterMap">#{Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderID]};#{Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderDetailID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Détermine si les clés dupliquées dans les données de référence doivent être traitées en tant qu'erreurs lorsque le mode Cache complet est utilisé."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Sales\Recherche.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.Projet_CC_24_25]"
+                  description="Gestionnaire de connexions utilisé pour accéder aux données de correspondance."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche]"
+                  name="Entrée de recherche">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Spécifie la colonne de la table de référence sur laquelle une colonne se lie."
+                          name="JoinToReferenceColumn">SalesOrderID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche].Columns[SalesOrderDetailID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailID"
+                      lineageId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[SalesOrderDetailID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Spécifie la colonne de la table de référence sur laquelle une colonne se lie."
+                          name="JoinToReferenceColumn">SalesOrderDetailID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Recherche.Outputs[Sortie de recherche avec correspondance]"
+                  errorOrTruncationOperation="Recherche"
+                  exclusionGroup="1"
+                  name="Sortie de recherche avec correspondance"
+                  synchronousInputId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Fact_Sales\Recherche.Outputs[Sortie de recherche sans correspondance]"
+                  description="Sortie de recherche gérant les lignes sans entrées correspondantes dans le dataset de référence. Utilisez cette sortie lorsque la propriété NoMatchBehavior a la valeur « Envoyez les lignes sans entrées correspondantes dans la sortie sans correspondance »."
+                  exclusionGroup="1"
+                  name="Sortie de recherche sans correspondance"
+                  synchronousInputId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Fact_Sales\Recherche.Outputs[Sortie d'erreur de recherche]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de recherche"
+                  synchronousInputId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\SalesOrderDetail"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+              description="Source OLE DB"
+              name="SalesOrderDetail"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">[Sales].[SalesOrderDetail]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable contenant la commande SQL à exécuter."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Mappages entre les paramètres de la commande SQL et les variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Sales\SalesOrderDetail.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB]"
+                  name="Sortie de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderDetailID]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[ProductID]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[OrderQty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[OrderQty]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[OrderQty]"
+                      name="OrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderDetailID]"
+                      dataType="i4"
+                      name="SalesOrderDetailID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="CarrierTrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[OrderQty]"
+                      dataType="i2"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[UnitPriceDiscount]"
+                      dataType="cy"
+                      name="UnitPriceDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[LineTotal]"
+                      dataType="numeric"
+                      name="LineTotal"
+                      precision="38"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderID]"
+                      name="SalesOrderID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[OrderQty]"
+                      dataType="i2"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[OrderQty]"
+                      name="OrderQty" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie d'erreur de source OLE DB].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\SalesOrderHeader"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+              description="Source OLE DB"
+              name="SalesOrderHeader"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">[Sales].[SalesOrderHeader]</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable contenant la commande SQL à exécuter."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Mappages entre les paramètres de la commande SQL et les variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_Sales\SalesOrderHeader.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-226V8CD.AdventureWorks2019]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB]"
+                  name="Sortie de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Freight]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[Freight]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Freight]"
+                      name="Freight"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SubTotal]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SubTotal]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SubTotal]"
+                      name="SubTotal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TaxAmt]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TaxAmt]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TaxAmt]"
+                      name="TaxAmt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TotalDue]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TotalDue]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TotalDue]"
+                      name="TotalDue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Status]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[Status]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[CustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[CustomerID]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesPersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SalesPersonID]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesPersonID]"
+                      name="SalesPersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TerritoryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TerritoryID]"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TerritoryID]"
+                      name="TerritoryID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[RevisionNumber]"
+                      dataType="ui1"
+                      name="RevisionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      name="ShipDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[Status]"
+                      dataType="ui1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[OnlineOrderFlag]"
+                      dataType="bool"
+                      name="OnlineOrderFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SalesOrderNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="SalesOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[PurchaseOrderNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="PurchaseOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[AccountNumber]"
+                      dataType="wstr"
+                      length="15"
+                      name="AccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SalesPersonID]"
+                      dataType="i4"
+                      name="SalesPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TerritoryID]"
+                      dataType="i4"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[BillToAddressID]"
+                      dataType="i4"
+                      name="BillToAddressID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[ShipToAddressID]"
+                      dataType="i4"
+                      name="ShipToAddressID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[ShipMethodID]"
+                      dataType="i4"
+                      name="ShipMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[CreditCardID]"
+                      dataType="i4"
+                      name="CreditCardID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[CreditCardApprovalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="CreditCardApprovalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[CurrencyRateID]"
+                      dataType="i4"
+                      name="CurrencyRateID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[SubTotal]"
+                      dataType="cy"
+                      name="SubTotal" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TaxAmt]"
+                      dataType="cy"
+                      name="TaxAmt" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[TotalDue]"
+                      dataType="cy"
+                      name="TotalDue" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[Comment]"
+                      dataType="wstr"
+                      length="128"
+                      name="Comment" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesOrderID]"
+                      name="SalesOrderID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[Freight]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[Freight]"
+                      name="Freight" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SubTotal]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SubTotal]"
+                      name="SubTotal" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TaxAmt]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TaxAmt]"
+                      name="TaxAmt" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TotalDue]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TotalDue]"
+                      name="TotalDue" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[Status]"
+                      dataType="ui1"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesPersonID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[SalesPersonID]"
+                      name="SalesPersonID" />
+                    <outputColumn
+                      refId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TerritoryID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie d'erreur de source OLE DB].Columns[TerritoryID]"
+                      name="TerritoryID" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\Trier"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Trier"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[SalesOrderDetailID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailID"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderDetailID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[ProductID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[OrderQty]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPrice]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier.Inputs[Entrée de tri].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      lineageId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPriceDiscount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[SalesOrderDetailID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[ProductID]"
+                      name="ProductID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[ProductID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[OrderQty]"
+                      dataType="i2"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[OrderQty]"
+                      name="OrderQty">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[OrderQty]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPrice]"
+                      name="UnitPrice">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPrice]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier.Outputs[Sortie de tri].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB].Columns[UnitPriceDiscount]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_Sales\Trier 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Trier 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Freight]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[SubTotal]"
+                      cachedDataType="cy"
+                      cachedName="SubTotal"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SubTotal]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[TaxAmt]"
+                      cachedDataType="cy"
+                      cachedName="TaxAmt"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TaxAmt]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[TotalDue]"
+                      cachedDataType="cy"
+                      cachedName="TotalDue"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TotalDue]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[Status]"
+                      cachedDataType="ui1"
+                      cachedName="Status"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Status]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[CustomerID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[SalesPersonID]"
+                      cachedDataType="i4"
+                      cachedName="SalesPersonID"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesPersonID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      lineageId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TerritoryID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesOrderID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Freight]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Freight]"
+                      name="Freight">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Freight]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SubTotal]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SubTotal]"
+                      name="SubTotal">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SubTotal]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TaxAmt]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TaxAmt]"
+                      name="TaxAmt">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TaxAmt]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TotalDue]"
+                      dataType="cy"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TotalDue]"
+                      name="TotalDue">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TotalDue]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Status]"
+                      dataType="ui1"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[Status]"
+                      name="Status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[Status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[CustomerID]"
+                      name="CustomerID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[CustomerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesPersonID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[SalesPersonID]"
+                      name="SalesPersonID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[SalesPersonID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TerritoryID]"
+                      dataType="i4"
+                      lineageId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de colonne dérivée]"
+              endId="Package\Fact_Sales\Recherche.Inputs[Entrée de recherche]"
+              name="Sortie de colonne dérivée"
+              startId="Package\Fact_Sales\Colonne dérivée.Outputs[Sortie de colonne dérivée]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de jointure de fusion]"
+              endId="Package\Fact_Sales\Colonne dérivée.Inputs[Entrée de colonne dérivée]"
+              name="Sortie de jointure de fusion"
+              startId="Package\Fact_Sales\Jointure de fusion.Outputs[Sortie de jointure de fusion]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de recherche sans correspondance]"
+              endId="Package\Fact_Sales\Fact_Sales.Inputs[Entrée de destination OLE DB]"
+              name="Sortie de recherche sans correspondance"
+              startId="Package\Fact_Sales\Recherche.Outputs[Sortie de recherche sans correspondance]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de source OLE DB]"
+              endId="Package\Fact_Sales\Trier.Inputs[Entrée de tri]"
+              name="Sortie de source OLE DB"
+              startId="Package\Fact_Sales\SalesOrderDetail.Outputs[Sortie de source OLE DB]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de source OLE DB1]"
+              endId="Package\Fact_Sales\Trier 1.Inputs[Entrée de tri]"
+              name="Sortie de source OLE DB"
+              startId="Package\Fact_Sales\SalesOrderHeader.Outputs[Sortie de source OLE DB]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de tri]"
+              endId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Fact_Sales\Trier.Outputs[Sortie de tri]" />
+            <path
+              refId="Package\Fact_Sales.Paths[Sortie de tri1]"
+              endId="Package\Fact_Sales\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Fact_Sales\Trier 1.Outputs[Sortie de tri]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D7137C8B-9426-46BD-8163-2C7E878A0012}"
+      DTS:From="Package\Empty Fact"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Fact_Inventory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0B23988F-6E2C-4ECA-A730-40BA4DDE3614}"
+      DTS:From="Package\Empty Fact"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Fact_Sales" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131.2,41.6"
+          Id="Package\Empty Fact"
+          TopLeft="341.685714624792,122.352941069223" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Fact_Inventory"
+          TopLeft="419.324603678953,234.893790648454" />
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Fact_Sales"
+          TopLeft="250.000000532184,234.764705676572" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="427.819047958125,163.952941069223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.9055557208281,70.9408495792304"
+              Start="0,0"
+              End="65.9055557208281,63.4408495792304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.8891652503372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.8891652503372"
+                    Point2="0,28.8891652503372"
+                    Point3="4,28.8891652503372" />
+                  <mssgle:LineSegment
+                    End="61.9055557208281,28.8891652503372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="61.9055557208281,28.8891652503372"
+                    Point2="65.9055557208281,28.8891652503372"
+                    Point3="65.9055557208281,32.8891652503372" />
+                  <mssgle:LineSegment
+                    End="65.9055557208281,63.4408495792304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="386.752381291458,163.952941069223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-72.7523807592739,70.8117646073489"
+              Start="0,0"
+              End="-72.7523807592739,63.3117646073489">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.8365981172096" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.8365981172096"
+                    Point2="0,28.8365981172096"
+                    Point3="-4,28.8365981172096" />
+                  <mssgle:LineSegment
+                    End="-68.7523807592739,28.8365981172096" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-68.7523807592739,28.8365981172096"
+                    Point2="-72.7523807592739,28.8365981172096"
+                    Point3="-72.7523807592739,32.8365981172096" />
+                  <mssgle:LineSegment
+                    End="-72.7523807592739,63.3117646073489" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Fact_Inventory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Fact_Inventory\ProductInventory"
+          TopLeft="200.999997004867,34.9999994784593" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Fact_Inventory\Fact_Inventory"
+          TopLeft="206.999996915459,149.000000461935" />
+        <EdgeLayout
+          Id="Package\Fact_Inventory.Paths[Sortie de source OLE DB]"
+          TopLeft="280.999996960163,76.5999994784593">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.4000009834761"
+              Start="0,0"
+              End="0,64.9000009834761">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.9000009834761" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Inventory\Fact_Inventory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Inventory\ProductInventory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Fact_Sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="100,41.6"
+          Id="Package\Fact_Sales\Trier 1"
+          TopLeft="442.857143799869,106.294117553888" />
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Fact_Sales\Fact_Sales"
+          TopLeft="328.571429270871,382.352940841323" />
+        <NodeLayout
+          Size="100,41.6"
+          Id="Package\Fact_Sales\Trier"
+          TopLeft="212.85714331026,107.058823435571" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Fact_Sales\Jointure de fusion"
+          TopLeft="301.428572070234,171.294117496913" />
+        <NodeLayout
+          Size="127.2,41.6"
+          Id="Package\Fact_Sales\Recherche"
+          TopLeft="328.571429270871,308.941176199789" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Fact_Sales\SalesOrderHeader"
+          TopLeft="407.857143725364,34.4117646757191" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Fact_Sales\SalesOrderDetail"
+          TopLeft="177.857143235754,32.8823529123538" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\Fact_Sales\Colonne dérivée"
+          TopLeft="309.285714944102,239.352940966668" />
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de recherche sans correspondance]"
+          TopLeft="392.371429270871,350.541176199789">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.811764641534"
+              Start="0,0"
+              End="0,24.311764641534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.311764641534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.50201171875,6.351194820767,183.0040234375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de jointure de fusion]"
+          TopLeft="384.557143507168,212.894117496913">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.4588234697555"
+              Start="0,0"
+              End="0,18.9588234697555">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9588234697555" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de colonne dérivée]"
+          TopLeft="389.328572107487,280.952940966668">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.9882352331209"
+              Start="0,0"
+              End="0,20.4882352331209">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.4882352331209" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de tri1]"
+          TopLeft="492.857143799869,147.894117553888">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-84.4952383963023,23.399999943025"
+              Start="0,0"
+              End="-84.4952383963023,15.899999943025">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.90302435639241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.90302435639241"
+                    Point2="0,13.9030243563924"
+                    Point3="-4,13.9030243563924" />
+                  <mssgle:LineSegment
+                    End="-80.4952383963023,13.9030243563924" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-80.4952383963023,13.9030243563924"
+                    Point2="-84.4952383963023,13.9030243563924"
+                    Point3="-84.4952383963023,17.9030243563924" />
+                  <mssgle:LineSegment
+                    End="-84.4952383963023,15.899999943025" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de tri]"
+          TopLeft="262.85714331026,148.658823435571">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.771428759974,22.6352940613424"
+              Start="0,0"
+              End="119.771428759974,15.1352940613424">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.31764703067118" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.31764703067118"
+                    Point2="0,11.3176470306712"
+                    Point3="4,11.3176470306712" />
+                  <mssgle:LineSegment
+                    End="115.771428759974,11.3176470306712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="115.771428759974,11.3176470306712"
+                    Point2="119.771428759974,11.3176470306712"
+                    Point3="119.771428759974,15.3176470306712" />
+                  <mssgle:LineSegment
+                    End="119.771428759974,15.1352940613424" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de source OLE DB1]"
+          TopLeft="491.157143762617,76.0117646757191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.2823528781688"
+              Start="0,0"
+              End="0,22.7823528781688">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.7823528781688" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact_Sales.Paths[Sortie de source OLE DB]"
+          TopLeft="259.357143273007,74.4823529123538">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5764705232167"
+              Start="0,0"
+              End="0,25.0764705232167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.0764705232167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Sales\Fact_Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Sales\Recherche">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Sales\SalesOrderHeader">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Sales\SalesOrderDetail">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
