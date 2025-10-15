@@ -25,7 +25,7 @@ AdventureWorks2019 (OLTP)
 ## 📁 Project Structure
 
 ```
-Projet_CC_2425_AdventureWorks2019/
+adventureworks-bi-analytics/
 │
 ├── Projet_AdventureWorks2019_CC_2425/      # SSIS ETL Project
 ├── Cube_AdventureWorks2019_CC_2425/        # SSAS Cube Project
